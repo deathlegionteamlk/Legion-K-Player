@@ -3,6 +3,7 @@ name: Build and Deploy Legion K Player
 on:
   push:
     branches: [ master, main ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ master, main ]
 
@@ -50,3 +51,26 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy web --project-name=legion-k-player
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Legion-K-Player-Builds
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            Legion-K-Player-Bin
+            Legion-K-Player.exe
+          tag_name: latest
+          name: Legion K Player Full Release
+          body: Official build of Legion K Player Full Version by DEMO X HEXA.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
