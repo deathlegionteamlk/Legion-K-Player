@@ -82,50 +82,65 @@ nav {
     color: #4da3ff;
 }
 
-.docs {
+.gallery {
+    padding: 5rem 5%;
+    text-align: center;
+}
+
+.gallery h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #4da3ff;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #1a3a64;
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+.features-list {
     padding: 5rem 10%;
     background-color: #0d1b32;
 }
 
-.docs h2 {
+.features-list h2 {
     text-align: center;
     margin-bottom: 3rem;
     font-size: 2.5rem;
     color: #4da3ff;
 }
 
-.doc-grid {
+.feature-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 3rem;
 }
 
-.doc-item h3 {
-    color: #4da3ff;
-    margin-bottom: 1rem;
+.col h3 {
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #4da3ff;
+    padding-bottom: 0.5rem;
 }
 
-.doc-item p {
+.col ul {
+    list-style: none;
+}
+
+.col li {
+    margin-bottom: 0.5rem;
     color: #a0aec0;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 5rem 10%;
-}
-
-.feature-card {
-    background-color: #1a2a4a;
-    padding: 2rem;
-    border-radius: 10px;
-    border: 1px solid #2d4a7a;
-}
-
-.feature-card h3 {
-    margin-bottom: 1rem;
-    color: #4da3ff;
 }
 
 footer {
