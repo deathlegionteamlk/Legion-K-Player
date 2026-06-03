@@ -22,6 +22,18 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev g++-mingw-w64-x86-64
 
+    - name: Download SDL2 MinGW DLLs
+      run: |
+        curl -L https://github.com/libsdl-org/SDL/releases/download/release-2.30.3/SDL2-devel-2.30.3-mingw.tar.gz -o sdl2.tar.gz
+        curl -L https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-devel-2.8.2-mingw.tar.gz -o sdl2_image.tar.gz
+        curl -L https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.22.0/SDL2_ttf-devel-2.22.0-mingw.tar.gz -o sdl2_ttf.tar.gz
+        tar -xzf sdl2.tar.gz
+        tar -xzf sdl2_image.tar.gz
+        tar -xzf sdl2_ttf.tar.gz
+        cp SDL2-2.30.3/x86_64-w64-mingw32/bin/SDL2.dll .
+        cp SDL2_image-2.8.2/x86_64-w64-mingw32/bin/SDL2_image.dll .
+        cp SDL2_ttf-2.22.0/x86_64-w64-mingw32/bin/SDL2_ttf.dll .
+
     - name: Build Linux Binary
       run: |
         make
@@ -37,6 +49,9 @@ jobs:
         path: |
           Legion-K-Player-Bin
           Legion-K-Player.exe
+          SDL2.dll
+          SDL2_image.dll
+          SDL2_ttf.dll
 
   deploy:
     needs: build
@@ -67,9 +82,12 @@ jobs:
           files: |
             Legion-K-Player-Bin
             Legion-K-Player.exe
+            SDL2.dll
+            SDL2_image.dll
+            SDL2_ttf.dll
           tag_name: latest
           name: Legion K Player Full Release
-          body: Official build of Legion K Player Full Version by DEMO X HEXA.
+          body: Official build of Legion K Player Full Version by DEMO X HEXA. Includes required DLLs for Windows.
           draft: false
           prerelease: false
         env:
