@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install Dependencies
       run: |
@@ -23,31 +23,29 @@ jobs:
 
     - name: Build Linux Binary
       run: |
-        cd Legion-K-Player
         make
 
     - name: Build Windows EXE
       run: |
-        cd Legion-K-Player
         make win
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Legion-K-Player-Builds
         path: |
-          Legion-K-Player/Legion-K-Player-Bin
-          Legion-K-Player/Legion-K-Player.exe
+          Legion-K-Player-Bin
+          Legion-K-Player.exe
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Legion-K-Player/web
+          publish_dir: ./web
