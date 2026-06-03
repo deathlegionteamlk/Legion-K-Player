@@ -1,15 +1,15 @@
 CXX = g++
 CXX_WIN = x86_64-w64-mingw32-g++
-CXXFLAGS = -Iinclude -Wall -Wextra -std=c++17
+CXXFLAGS = -Iinclude -Iinclude/core -Iinclude/ui -Wall -Wextra -std=c++17
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
 MINGW_INC = /home/jules/mingw_sdk/include
 MINGW_LIB = /home/jules/mingw_sdk/lib
 
-CXXFLAGS_WIN = -Iinclude -I$(MINGW_INC) -Wall -Wextra -std=c++17
+CXXFLAGS_WIN = -Iinclude -Iinclude/core -Iinclude/ui -I$(MINGW_INC) -Wall -Wextra -std=c++17
 LDFLAGS_WIN = -L$(MINGW_LIB) -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -mwindows
 
-SRC = src/main.cpp src/KEngine.cpp src/UI.cpp
+SRC = src/main.cpp src/core/KVirtualMachine.cpp src/ui/KInterface.cpp
 OBJ = $(SRC:.cpp=.o)
 TARGET = Legion-K-Player-Bin
 TARGET_WIN = Legion-K-Player.exe
