@@ -4,7 +4,7 @@ Legion K Player is a high-performance Android-style emulator frontend and virtua
 
 ## Live Deployment
 Visit the official **Legion K Player Landing Page** for downloads and information:
-[**Download & Web Portal**](https://deathlegionteamlk.github.io/Legion-K-Player/) 
+[**Download & Web Portal (Cloudflare)**](https://legion-k-player.pages.dev/) 
 
 ## Features
 - **Polished UI**: A complete SDL2-based graphical interface with a sleek blue theme.
