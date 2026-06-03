@@ -1,15 +1,22 @@
 CXX = g++
 CXX_WIN = x86_64-w64-mingw32-g++
-CXXFLAGS = -Iinclude -Iinclude/core -Iinclude/ui -Iinclude/bridge -Iinclude/network -Wall -Wextra -std=c++17
+
+MOD_DIRS = modules/gaming modules/system modules/media modules/network modules/input
+INC_DIRS = -Iinclude -Iinclude/core -Iinclude/ui -Iinclude/bridge -Iinclude/network $(addprefix -I, $(MOD_DIRS))
+
+CXXFLAGS = $(INC_DIRS) -Wall -Wextra -std=c++17
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
 MINGW_INC = /home/jules/mingw_sdk/include
 MINGW_LIB = /home/jules/mingw_sdk/lib
 
-CXXFLAGS_WIN = -Iinclude -Iinclude/core -Iinclude/ui -Iinclude/bridge -Iinclude/network -I$(MINGW_INC) -Wall -Wextra -std=c++17
+CXXFLAGS_WIN = $(INC_DIRS) -I$(MINGW_INC) -Wall -Wextra -std=c++17
 LDFLAGS_WIN = -L$(MINGW_LIB) -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -mwindows
 
-SRC = src/main.cpp src/core/KVirtualMachine.cpp src/ui/KInterface.cpp src/bridge/KBridge.cpp src/network/KNetwork.cpp
+SRC_CORE = src/main.cpp src/core/KVirtualMachine.cpp src/ui/KInterface.cpp src/bridge/KBridge.cpp src/network/KNetwork.cpp
+SRC_MODS = $(wildcard modules/*/*.cpp)
+SRC = $(SRC_CORE) $(SRC_MODS)
+
 OBJ = $(SRC:.cpp=.o)
 TARGET = Legion-K-Player-Bin
 TARGET_WIN = Legion-K-Player.exe
