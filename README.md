@@ -1,14 +1,13 @@
-# Build Your Own Legion K Player (Full Version)
+# Legion K Player (Full Version)
 
-This project is a high-performance Android-style emulator frontend and virtual machine core, built in the style of the "Build Your Own X" tutorials. It is a full-featured clone inspired by professional emulators like BlueStacks, developed by **DEMO X HEXA** (Death Legion Team).
+Legion K Player is a high-performance Android-style emulator frontend and virtual machine core. It is a full-featured emulator inspired by professional solutions, developed by **DEMO X HEXA** (Death Legion Team).
 
 ## Live Deployment
 Visit the official **Legion K Player Landing Page** for downloads and information:
-[**Download & Web Portal**](https://deathlegionteamlk.github.io/feature-legion-k-player-2235649900041264076/) 
-*(Note: Link will be active once GitHub Pages deployment is finished)*
+[**Download & Web Portal**](https://deathlegionteamlk.github.io/Legion-K-Player/) 
 
 ## Features
-- **Polished UI**: A complete SDL2-based graphical interface with a BlueStacks-inspired blue theme.
+- **Polished UI**: A complete SDL2-based graphical interface with a sleek blue theme.
 - **K-Engine Core**: A custom register-based Virtual Machine designed for high-speed bytecode execution.
 - **Full Sidebar**: Interactive controls for Home, Back, and Settings.
 - **App Dashboard**: A stylized app drawer with responsive icons.
@@ -20,21 +19,19 @@ Visit the official **Legion K Player Landing Page** for downloads and informatio
 - `web/`: Landing page and download portal.
 - `assets/`: Resources for the player.
 
-## Web Page & Downloads
+## Downloads
 Built binaries (Linux and Windows `.exe`) are available as artifacts in the **GitHub Actions** tab after every build.
 
 ## How to Build
 ### Linux
 Ensure you have `libsdl2-dev`, `libsdl2-image-dev`, and `libsdl2-ttf-dev` installed.
 ```bash
-cd Legion-K-Player
 make
 ```
 
 ### Windows (Cross-Compile)
 Ensure you have `g++-mingw-w64-x86-64` installed.
 ```bash
-cd Legion-K-Player
 make win
 ```
 
