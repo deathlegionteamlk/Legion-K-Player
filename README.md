@@ -35,11 +35,6 @@ Developed by **DEMO X HEXA** | Team Death Legion.
 ```text
 ├── src/            # Core Engine (VM, UI, Bridge, Network)
 ├── modules/        # 100+ Dedicated Feature Subsystems
-│   ├── gaming/     # Macro, FPS, Combo, Reroll Managers
-│   ├── system/     # Driver, Thermal, Power, Disk Optimizers
-│   ├── media/      # Recorder, Streamer, Editor, GIF Tools
-│   ├── network/    # VPN, Proxy, DNS, Sync, P2P Links
-│   └── input/      # KeyMapper, Haptic, Stylus, Gesture Engines
 ├── web/            # Responsive Official Web Portal
 └── config/         # Deep Performance Tuning (emulator.cfg)
 ```
@@ -47,8 +42,6 @@ Developed by **DEMO X HEXA** | Team Death Legion.
 ---
 
 ## 🚀 Deployment & Live Portal
-
-[**Official Landing Page**](https://legion-k-player.pages.dev/)
 
 [**Download Releases (Linux/Windows)**](https://github.com/deathlegionteamlk/Legion-K-Player/releases)
 
