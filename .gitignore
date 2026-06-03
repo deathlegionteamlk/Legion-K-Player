@@ -1,0 +1,20 @@
+# Build artifacts
+*.o
+Legion-K-Player-Bin
+Legion-K-Player.exe
+*.patch
+*.diff
+
+# Dependencies
+sdl2*.tar.gz
+mingw_sdk/
+bin_extract/
+
+# IDE and System
+.vscode/
+.DS_Store
+*.swp
+*.zip
+
+# Local tools
+self_created_tools/
