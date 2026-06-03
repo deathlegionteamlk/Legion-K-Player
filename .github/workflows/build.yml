@@ -1,4 +1,4 @@
-name: Build and Deploy Legion K Player
+name: Legion K Player Production Build
 
 on:
   push:
@@ -13,39 +13,42 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install Dependencies
+    - name: Deps
       run: |
         sudo apt-get update
         sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev g++-mingw-w64-x86-64
-
-    - name: Download SDL2 MinGW DLLs
+    - name: SDL2 Win64
       run: |
         curl -L https://github.com/libsdl-org/SDL/releases/download/release-2.30.3/SDL2-devel-2.30.3-mingw.tar.gz -o sdl2.tar.gz
-        curl -L https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-devel-2.8.2-mingw.tar.gz -o sdl2_image.tar.gz
+        curl -L https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-devel-2.8.2-mingw.tar.gz -o sdl2_img.tar.gz
         curl -L https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.22.0/SDL2_ttf-devel-2.22.0-mingw.tar.gz -o sdl2_ttf.tar.gz
         tar -xzf sdl2.tar.gz
-        tar -xzf sdl2_image.tar.gz
+        tar -xzf sdl2_img.tar.gz
         tar -xzf sdl2_ttf.tar.gz
         cp SDL2-2.30.3/x86_64-w64-mingw32/bin/SDL2.dll .
         cp SDL2_image-2.8.2/x86_64-w64-mingw32/bin/SDL2_image.dll .
         cp SDL2_ttf-2.22.0/x86_64-w64-mingw32/bin/SDL2_ttf.dll .
-
-    - name: Build Linux Binary
+        # Setup local mingw paths for build
+        sudo mkdir -p /home/runner/mingw_sdk/include/SDL2
+        sudo mkdir -p /home/runner/mingw_sdk/lib
+        sudo cp -r SDL2-2.30.3/x86_64-w64-mingw32/include/SDL2/* /home/runner/mingw_sdk/include/SDL2/
+        sudo cp -r SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/* /home/runner/mingw_sdk/include/SDL2/
+        sudo cp -r SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/* /home/runner/mingw_sdk/include/SDL2/
+        sudo cp SDL2-2.30.3/x86_64-w64-mingw32/lib/*.a /home/runner/mingw_sdk/lib/
+        sudo cp SDL2_image-2.8.2/x86_64-w64-mingw32/lib/*.a /home/runner/mingw_sdk/lib/
+        sudo cp SDL2_ttf-2.22.0/x86_64-w64-mingw32/lib/*.a /home/runner/mingw_sdk/lib/
+    - name: Linux Build
+      run: make
+    - name: Windows Build
       run: |
-        make
-
-    - name: Build Windows EXE
-      run: |
+        sed -i 's/\/home\/jules\/mingw_sdk/\/home\/runner\/mingw_sdk/g' Makefile
         make win
-
-    - name: Upload Artifacts
+    - name: Pack
       uses: actions/upload-artifact@v4
       with:
-        name: Legion-K-Player-Builds
+        name: Legion-K-Player-Release
         path: |
           Legion-K-Player-Bin
           Legion-K-Player.exe
@@ -56,11 +59,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Deploy to Cloudflare Pages
+      - name: Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -70,13 +72,12 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main'
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: Legion-K-Player-Builds
-
-      - name: Create Release
+          name: Legion-K-Player-Release
+      - name: GH Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -87,8 +88,6 @@ jobs:
             SDL2_ttf.dll
           tag_name: latest
           name: Legion K Player Full Release
-          body: Official build of Legion K Player Full Version by DEMO X HEXA. Includes required DLLs for Windows.
-          draft: false
-          prerelease: false
+          body: Production build of Legion K Player Full Version.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
