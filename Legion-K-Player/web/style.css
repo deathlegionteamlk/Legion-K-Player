@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0a1428;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #0f1e3c;
+    padding: 1rem 5%;
+    border-bottom: 2px solid #1a3a64;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4da3ff;
+}
+
+.team {
+    font-size: 0.9rem;
+    color: #8899ac;
+}
+
+.hero {
+    text-align: center;
+    padding: 5rem 10%;
+    background: linear-gradient(180deg, #0f1e3c 0%, #0a1428 100%);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #a0aec0;
+    margin-bottom: 2.5rem;
+}
+
+.download-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.download-btn {
+    background-color: #4da3ff;
+    color: #0a1428;
+}
+
+.download-btn:hover {
+    background-color: #3391ff;
+    transform: translateY(-2px);
+}
+
+.download-btn.secondary {
+    background-color: transparent;
+    border: 2px solid #4da3ff;
+    color: #4da3ff;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 5rem 10%;
+}
+
+.feature-card {
+    background-color: #1a2a4a;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #2d4a7a;
+}
+
+.feature-card h3 {
+    margin-bottom: 1rem;
+    color: #4da3ff;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #071021;
+    color: #718096;
+    font-size: 0.85rem;
+}
