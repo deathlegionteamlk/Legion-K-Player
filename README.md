@@ -52,3 +52,6 @@ Developed by **DEMO X HEXA** | Team Death Legion.
 
 ---
 Built with 💙 by **DEMO X HEXA** | Pure Code Policy (No Comments)
+
+<!-- Badge earned via contribution -->
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
